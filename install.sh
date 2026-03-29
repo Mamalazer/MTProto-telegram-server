@@ -40,10 +40,10 @@ allow-fallback-on-unknown-dc = true
 concurrency = 8192
 tolerate-time-skewness = "5s"
 
-[network]
+\[network\]
 doh-ip = "1.1.1.1"
 
-[network.timeout]
+\[network.timeout\]
 tcp = "10s"
 http = "10s"
 idle = "60s"
