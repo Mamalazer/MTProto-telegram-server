@@ -39,7 +39,6 @@ prefer-ip = "prefer-ipv4"
 allow-fallback-on-unknown-dc = true
 concurrency = 8192
 tolerate-time-skewness = "5s"
-EOF
 
 [network]
 doh-ip = "1.1.1.1"
