@@ -39,11 +39,13 @@ prefer-ip = "prefer-ipv4"
 allow-fallback-on-unknown-dc = true
 concurrency = 8192
 tolerate-time-skewness = "5s"
+EOF
 
-\[network\]
+sudo tee -a /opt/mtg/config.toml > /dev/null <<'EOF'
+[network]
 doh-ip = "1.1.1.1"
 
-\[network.timeout\]
+[network.timeout]
 tcp = "10s"
 http = "10s"
 idle = "60s"
