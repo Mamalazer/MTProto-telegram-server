@@ -32,7 +32,7 @@ echo "🌐 IP сервера: $IP"
 
 # 4. Создаём конфиг
 sudo mkdir -p /opt/mtg
-cat > /opt/mtg/config.toml <<EOF
+sudo cat > /opt/mtg/config.toml <<EOF
 secret = "${SECRET}"
 bind-to = "0.0.0.0:3128"
 prefer-ip = "prefer-ipv4"
