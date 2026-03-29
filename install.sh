@@ -22,7 +22,7 @@ fi
 
 # 2. Генерируем fake-TLS секрет
 # Формат: ee + 16 случайных байт + 7777772e676f6f676c652e636f6d (www.google.com)
-RAND_PART=$(head -c 16 /dev/urandom | xxd -ps -c 256)
+RAND_PART=$(sudo head -c 16 /dev/urandom | xxd -ps -c 256)
 SECRET="ee${RAND_PART}7777772e676f6f676c652e636f6d"
 echo "🔑 Сгенерирован fake-TLS секрет"
 
@@ -31,7 +31,7 @@ IP=$(curl -4 -s ifconfig.me || curl -4 -s icanhazip.com || hostname -I | awk '{p
 echo "🌐 IP сервера: $IP"
 
 # 4. Создаём конфиг
-mkdir -p /opt/mtg
+sudo mkdir -p /opt/mtg
 cat > /opt/mtg/config.toml <<EOF
 secret = "${SECRET}"
 bind-to = "0.0.0.0:3128"
@@ -50,11 +50,11 @@ idle = "60s"
 EOF
 
 # 5. Останавливаем старый контейнер (если есть)
-docker rm -f mtg 2>/dev/null || true
+sudo docker rm -f mtg 2>/dev/null || true
 
 # 6. Запускаем
 echo "🚀 Запускаю прокси..."
-docker run -d \
+sudo docker run -d \
     --name mtg \
     --restart always \
     -p 3128:3128 \
@@ -64,11 +64,11 @@ docker run -d \
 sleep 2
 
 # 7. Проверка
-if docker ps | grep -q mtg; then
+if sudo docker ps | grep -q mtg; then
     echo "   ✅ Прокси запущен"
 else
     echo "   ❌ Ошибка запуска! Логи:"
-    docker logs mtg
+    sudo docker logs mtg
     exit 1
 fi
 
